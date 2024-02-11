@@ -8,12 +8,19 @@ import (
 )
 
 type Archiver interface {
+	DestFmt() func(int64) string
 	Archive(src, dest string) error
 }
 
 type zipper struct{}
 
 var ZIP Archiver = (*zipper)(nil)
+
+func (z *zipper) DestFmt() func(int64) string {
+	return func(i int64) string {
+		return "%d.zip"
+	}
+}
 
 // Archive creates a zip file of the specified directory and its contents
 // and places it at the specified destination

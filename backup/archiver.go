@@ -2,6 +2,7 @@ package backup
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -18,7 +19,7 @@ var ZIP Archiver = (*zipper)(nil)
 
 func (z *zipper) DestFmt() func(int64) string {
 	return func(i int64) string {
-		return "%d.zip"
+		return fmt.Sprintf("%d.zip", i)
 	}
 }
 
